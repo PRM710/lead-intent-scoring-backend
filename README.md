@@ -217,7 +217,7 @@ If deploying on Render using Docker:
 
 ## 🔗 Connecting With Frontend (Optional)
 
-The frontend is deployed separately at:  
+The frontend is deployed separately at (This is mine you have to deploy it ureself on platforms like verce, netlify, etc..):  
 👉 [https://lead-intent-scoring-frontend.vercel.app/](https://lead-intent-scoring-frontend.vercel.app/)  
 
 If you want to connect your own frontend (React/Vite) to this backend:
@@ -229,16 +229,16 @@ FRONTEND_ORIGIN=https://lead-intent-scoring-frontend.vercel.app
 
 2. In **frontend `.env`**:
 ```
-VITE_API_BASE_URL=https://lead-intent-scoring-backend.onrender.com
+VITE_API_BASE_URL=https://your-deployed-frontend-link
 ```
 
-3. In backend (`index.js`), CORS is already configured to allow both local (`http://localhost:5173`) and deployed frontend.
+3. In backend (`index.js`), CORS is already configured to allow both local (`http://localhost:5173`) and deployed frontend. But to allow for your frontend you must add your deployed frontend link
 
 4. When running locally:
    - Backend → `http://localhost:3000`
    - Frontend → `http://localhost:5173`
 
-5. When deployed:
+5. When deployed (Will look something like this):
    - Backend → `https://lead-intent-scoring-backend.onrender.com`
    - Frontend → `https://lead-intent-scoring-frontend.vercel.app`
 
@@ -253,13 +253,5 @@ VITE_API_BASE_URL=https://lead-intent-scoring-backend.onrender.com
 - README with setup, usage, rule logic, Docker, and prompt explanation  
 - Deployed backend accessible via public URL  
 - (Optional) Connected frontend for demo purposes  
-
----
-
-## 📊 Example Use Case
-Sales/marketing teams can upload a list of prospects and instantly see **who is most likely to buy** based on:  
-- Offer’s target ICP  
-- Prospect’s role/industry  
-- Gemini’s AI classification & reasoning  
 
 ---
