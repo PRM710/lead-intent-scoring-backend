@@ -4,9 +4,12 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 
 ---
 
-## 🌍 Live API (Deployed)
+## 🌍 Live Deployment
 
-Base URL: **[https://lead-intent-scoring-backend.onrender.com](https://lead-intent-scoring-backend.onrender.com)**  
+- **Backend API Base URL**: [https://lead-intent-scoring-backend.onrender.com](https://lead-intent-scoring-backend.onrender.com)  
+- **Frontend (Sample UI)**: [https://lead-intent-scoring-frontend.vercel.app/](https://lead-intent-scoring-frontend.vercel.app/)  
+
+> The frontend is provided as a **sample UI** for testing the project visually. Core assignment requirement is backend.
 
 ---
 
@@ -43,8 +46,7 @@ Edit `.env` and set:
 PORT=3000
 GEMINI_API_KEY=your-gemini-api-key
 GEMINI_MODEL=gemini-1.5-flash
-# Optional: only needed if connecting with frontend
-FRONTEND_ORIGIN=http://localhost:5173
+FRONTEND_ORIGIN=https://lead-intent-scoring-frontend.vercel.app
 ```
 
 > ⚠️ If `GEMINI_API_KEY` is not set, the backend falls back to heuristic-only scoring.  
@@ -217,20 +219,32 @@ If deploying on Render using Docker:
 
 ---
 
-## 🔗 Connecting With Frontend
+## 🔗 Connecting With Frontend (Optional)
 
-If you want to connect a frontend (React Vite, etc.) to this backend:
+The frontend is deployed separately at:  
+👉 [https://lead-intent-scoring-frontend.vercel.app/](https://lead-intent-scoring-frontend.vercel.app/)  
 
-1. In `.env`, set the frontend origin:
+If you want to connect your own frontend (React/Vite) to this backend:
+
+1. In **backend `.env`**:
 ```
-FRONTEND_ORIGIN=http://localhost:5173
+FRONTEND_ORIGIN=https://lead-intent-scoring-frontend.vercel.app
 ```
-2. On deployment (if frontend is hosted, e.g. Render), set:
+
+2. In **frontend `.env`**:
 ```
-FRONTEND_ORIGIN=https://your-frontend.onrender.com
+VITE_API_BASE_URL=https://lead-intent-scoring-backend.onrender.com
 ```
-3. Backend will allow CORS requests from that origin only.  
-4. Without frontend, backend APIs still work directly via Postman or curl.
+
+3. In backend (`index.js`), CORS is already configured to allow both local (`http://localhost:5173`) and deployed frontend.
+
+4. When running locally:
+   - Backend → `http://localhost:3000`
+   - Frontend → `http://localhost:5173`
+
+5. When deployed:
+   - Backend → `https://lead-intent-scoring-backend.onrender.com`
+   - Frontend → `https://lead-intent-scoring-frontend.vercel.app`
 
 ---
 
@@ -242,6 +256,7 @@ FRONTEND_ORIGIN=https://your-frontend.onrender.com
 - JSON + CSV results output  
 - README with setup, usage, rule logic, Docker, and prompt explanation  
 - Deployed backend accessible via public URL  
+- (Optional) Connected frontend for demo purposes  
 
 ---
 
