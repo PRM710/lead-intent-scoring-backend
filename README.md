@@ -6,10 +6,7 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 
 ## 🌍 Live API (Deployed)
 
-Base URL: **[https://your-deployment-url.com](https://your-deployment-url.com)**  
-
-> Replace this link with your actual deployed backend URL.  
-> Example: `https://lead-scorer.onrender.com`
+Base URL: **[https://lead-intent-scoring-backend.onrender.com](https://lead-intent-scoring-backend.onrender.com)**  
 
 ---
 
@@ -46,9 +43,12 @@ Edit `.env` and set:
 PORT=3000
 GEMINI_API_KEY=your-gemini-api-key
 GEMINI_MODEL=gemini-1.5-flash
+# Optional: only needed if connecting with frontend
+FRONTEND_ORIGIN=http://localhost:5173
 ```
 
-> ⚠️ If `GEMINI_API_KEY` is not set, the backend falls back to heuristic-only scoring.
+> ⚠️ If `GEMINI_API_KEY` is not set, the backend falls back to heuristic-only scoring.  
+> ⚠️ `PORT` is optional for deployment; Render auto-assigns a port.
 
 ### 4. Run Server
 ```bash
@@ -73,8 +73,7 @@ John Doe,Software Engineer,DevCorp,Software,USA,"Fullstack engineer building dev
 
 To test quickly:
 ```bash
-curl -X POST https://your-deployment-url.com/leads/upload \
-  -F "file=@leads.sample.csv"
+curl -X POST https://lead-intent-scoring-backend.onrender.com/leads/upload   -F "file=@leads.sample.csv"
 ```
 
 ---
@@ -83,9 +82,7 @@ curl -X POST https://your-deployment-url.com/leads/upload \
 
 ### 1. Save Offer
 ```bash
-curl -X POST https://your-deployment-url.com/offer \
-  -H "Content-Type: application/json" \
-  -d '{
+curl -X POST https://lead-intent-scoring-backend.onrender.com/offer   -H "Content-Type: application/json"   -d '{
     "name": "AI Outreach Automation",
     "value_props": ["24/7 outreach","6x more meetings"],
     "ideal_use_cases": ["B2B SaaS mid-market"]
@@ -95,18 +92,17 @@ curl -X POST https://your-deployment-url.com/offer \
 ### 2. Upload Leads (CSV)
 Upload your own leads file or use the provided `leads.sample.csv`:
 ```bash
-curl -X POST https://your-deployment-url.com/leads/upload \
-  -F "file=@leads.sample.csv"
+curl -X POST https://lead-intent-scoring-backend.onrender.com/leads/upload   -F "file=@leads.sample.csv"
 ```
 
 ### 3. Run Scoring
 ```bash
-curl -X POST https://your-deployment-url.com/score
+curl -X POST https://lead-intent-scoring-backend.onrender.com/score
 ```
 
 ### 4. Get Results
 ```bash
-curl https://your-deployment-url.com/score/results
+curl https://lead-intent-scoring-backend.onrender.com/score/results
 ```
 
 Example response:
@@ -133,7 +129,7 @@ Example response:
 
 ### 5. Export Results as CSV (Bonus)
 ```bash
-curl https://your-deployment-url.com/score/results/export -o scored_leads.csv
+curl https://lead-intent-scoring-backend.onrender.com/score/results/export -o scored_leads.csv
 ```
 
 ---
@@ -203,17 +199,38 @@ npm test
 
 ---
 
-## 🐳 Docker (Bonus)
+## 🐳 Docker
 
-### Build
+### Local Run
+Build and run with Docker:
 ```bash
 docker build -t lead-scorer-backend .
-```
-
-### Run
-```bash
 docker run -p 3000:3000 --env-file .env lead-scorer-backend
 ```
+
+### Deployment with Docker on Render (Optional)
+If deploying on Render using Docker:
+- Render automatically detects the Dockerfile.
+- It builds the image and runs `CMD ["node", "index.js"]`.
+- The service listens on `process.env.PORT` (Render injects this automatically).
+- No manual port configuration is needed.
+
+---
+
+## 🔗 Connecting With Frontend
+
+If you want to connect a frontend (React Vite, etc.) to this backend:
+
+1. In `.env`, set the frontend origin:
+```
+FRONTEND_ORIGIN=http://localhost:5173
+```
+2. On deployment (if frontend is hosted, e.g. Render), set:
+```
+FRONTEND_ORIGIN=https://your-frontend.onrender.com
+```
+3. Backend will allow CORS requests from that origin only.  
+4. Without frontend, backend APIs still work directly via Postman or curl.
 
 ---
 
@@ -223,7 +240,7 @@ docker run -p 3000:3000 --env-file .env lead-scorer-backend
 - Rule + AI scoring pipeline implemented  
 - CSV upload & parsing  
 - JSON + CSV results output  
-- README with setup, usage, rule logic, and prompt explanation  
+- README with setup, usage, rule logic, Docker, and prompt explanation  
 - Deployed backend accessible via public URL  
 
 ---
