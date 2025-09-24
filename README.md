@@ -36,11 +36,7 @@ npm install
 ```
 
 ### 3. Configure Environment Variables
-Copy `.env.example` → `.env`:
-```bash
-cp .env.example .env
-```
-
+Make .env file in root of project
 Edit `.env` and set:
 ```
 PORT=3000
