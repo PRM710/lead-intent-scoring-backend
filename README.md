@@ -1,4 +1,4 @@
-# Lead Intent Scoring Backend (Gemini AI)
+# Lead Intent Scoring Backend (I have used Gemini API):
 
 Backend service that accepts product/offer details and a CSV of leads, then scores each lead’s buying intent (**High / Medium / Low**) using **rule-based logic + AI reasoning (Gemini)**.
 
