@@ -12,7 +12,7 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 > The frontend is provided as a **sample UI** for testing the project visually. Core assignment requirement is backend.
 > The backend might take 30 seconds to be awake after the first request, as its deployed on render free tier deployment service.
 
-**Repository for Frontend**: https://github.com/PRM710/lead-intent-scoring-frontend
+**Repository for Frontend**: `https://github.com/PRM710/lead-intent-scoring-frontend`
 
 ---
 
@@ -29,7 +29,7 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 
 ### 1. Clone Repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/PRM710/lead-intent-scoring-backend.git
 cd backend
 ```
 
