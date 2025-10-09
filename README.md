@@ -11,6 +11,8 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 
 > The frontend is provided as a **sample UI** for testing the project visually. Core assignment requirement is backend.
 
+**Repository for Frontend**: https://github.com/PRM710/lead-intent-scoring-frontend
+
 ---
 
 ## 📌 Objective
