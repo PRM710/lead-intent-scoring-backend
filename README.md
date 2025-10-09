@@ -10,6 +10,7 @@ Backend service that accepts product/offer details and a CSV of leads, then scor
 - **Frontend (Sample UI)**: [https://lead-intent-scoring-frontend.vercel.app/](https://lead-intent-scoring-frontend.vercel.app/)  
 
 > The frontend is provided as a **sample UI** for testing the project visually. Core assignment requirement is backend.
+> The backend might take 30 seconds to be awake after the first request, as its deployed on render free tier deployment service.
 
 **Repository for Frontend**: https://github.com/PRM710/lead-intent-scoring-frontend
 
